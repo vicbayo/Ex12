@@ -1,0 +1,21 @@
+Creación de las migraciones
+Add-Migration Initial -p Ex12.RepositoryEFCore -c Ex12Context -o Migrations -s Ex12.RepositoryEFCore
+
+Aplicar la migración a la base de datos
+Update-Database -p Ex12.RepositoryEFCore -s Ex12.RepositoryEFCore
+
+
+public byte[] RowVersion { get; set; }, genera en las migraciones RowVersion = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+
+Reiniciar las migraciones
+-------------------------
+1-Eliminar el estado: elimine la carpeta de migraciones en su proyecto.
+2-Elimine la __MigrationHistorytabla en su base de datos.
+3-Esto es opcional Ejecute el siguiente comando en la Consola del Administrador de paquetes:
+
+Enable-Migrations -EnableAutomaticMigrations -Force
+Usar con o sin -EnableAutomaticMigrations
+
+Y finalmente, puedes ejecutar:
+
+4-Add-Migration Initial

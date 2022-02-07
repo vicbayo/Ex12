@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.4" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ex12.Entities\Ex12.Entities.csproj" />
+    <ProjectReference Include="..\Ex12.Mappers\Ex12.Mappers.csproj" />
+    <ProjectReference Include="..\Ex12.UseCasesPort\Ex12.UseCasesPort.csproj" />
+  </ItemGroup>
+
+</Project>

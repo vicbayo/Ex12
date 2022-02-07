@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ex12.Controllers\Ex12.Controllers.csproj" />
+    <ProjectReference Include="..\Ex12.IoC\Ex12.IoC.csproj" />
+    <ProjectReference Include="..\Ex12.WebExceptionsPresenter\Ex12.WebExceptionsPresenter.csproj" />
+  </ItemGroup>
+
+</Project>

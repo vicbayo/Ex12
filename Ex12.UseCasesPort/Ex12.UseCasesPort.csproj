@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ex12.Dtos\Ex12.Dtos.csproj" />
+    <ProjectReference Include="..\Ex12.Entities\Ex12.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
