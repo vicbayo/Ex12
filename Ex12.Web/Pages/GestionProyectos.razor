@@ -1,0 +1,66 @@
+﻿@page "/Proyectos"
+@inject HttpClient Http
+
+<h3>Gestión de Proyectos</h3>
+<div style="padding:10px">
+    <RadzenButton Click=@(args => OnClick("Light button")) Text="Nuevo" ButtonStyle="ButtonStyle.Light" />
+    <RadzenButton Click=@(args => OnClick("Light button")) Text="Editar" ButtonStyle="ButtonStyle.Light" />
+</div>
+
+
+<RadzenDataGrid Data="proyectosDto" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" 
+            AllowPaging="true" PageSize="5" AllowSorting="true" AllowColumnResize="true" AllowColumnReorder="true">
+    <Columns>
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Id" Title="Id" />
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Clave" Title="Clave" />
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Titulo" Title="Título" />
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaAprobacion" Title="Aprobacion">
+            <Template Context="data">
+                @string.Format("{0:d}", data.FechaAprobacion)
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Creador" Title="Creador" />
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaCreacion" Title="Creación">
+            <Template Context="data">
+                @string.Format("{0:d}", data.FechaCreacion)
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Modificador" Title="Modificador" />
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaModificacion" Title="Modificacion">
+            <Template Context="data">
+                @string.Format("{0:d}", data.FechaModificacion)
+            </Template>
+        </RadzenDataGridColumn>
+    </Columns>
+
+</RadzenDataGrid>
+
+
+@code {
+    //EventConsole console;
+    private List<GetAllProyectosDto> proyectosDto;
+    private string errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //proyectosDto = await Http.GetFromJsonAsync<List<GetAllProyectosDto>>("api/GetAllIsActiveProyectos/GetAllIsActive");      //.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/GetAllIsActive");
+
+        if (!httpResponse.IsSuccessStatusCode)
+        {
+            // set error message for display, log to console and return
+            errorMessage = httpResponse.ReasonPhrase;
+            Console.WriteLine($"There was an error! {errorMessage}");
+            return;
+        }
+
+        // convert http response data to UsersResponse object
+        proyectosDto = await httpResponse.Content.ReadFromJsonAsync<List<GetAllProyectosDto>>();
+
+    }
+
+    void OnClick(string buttonName)
+    {
+        //console.Log($"{buttonName} clicked");
+    }
+}

@@ -11,4 +11,8 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ex12.Dtos\Ex12.Dtos.csproj" />
+  </ItemGroup>
+
 </Project>
