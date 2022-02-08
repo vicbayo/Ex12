@@ -14,23 +14,11 @@
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Id" Title="Id" />
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Clave" Title="Clave" />
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Titulo" Title="Título" />
-        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaAprobacion" Title="Aprobacion">
-            <Template Context="data">
-                @string.Format("{0:d}", data.FechaAprobacion)
-            </Template>
-        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaAprobacion" Title="Aprobacion" FormatString="{0:dd/MM/yyyy}" TextAlign="TextAlign.Center"/>
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Creador" Title="Creador" />
-        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaCreacion" Title="Creación">
-            <Template Context="data">
-                @string.Format("{0:d}", data.FechaCreacion)
-            </Template>
-        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaCreacion" Title="Creación" FormatString="{0:dd/MM/yyyy}" TextAlign="TextAlign.Center"/>
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Modificador" Title="Modificador" />
-        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaModificacion" Title="Modificacion">
-            <Template Context="data">
-                @string.Format("{0:d}", data.FechaModificacion)
-            </Template>
-        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaModificacion" Title="Modificacion" FormatString="{0:dd/MM/yyyy}" TextAlign="TextAlign.Center"/>
     </Columns>
 
 </RadzenDataGrid>
@@ -42,8 +30,7 @@
     private string errorMessage;
 
     protected override async Task OnInitializedAsync()
-    {
-        //proyectosDto = await Http.GetFromJsonAsync<List<GetAllProyectosDto>>("api/GetAllIsActiveProyectos/GetAllIsActive");      //.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    {        
         using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/GetAllIsActive");
 
         if (!httpResponse.IsSuccessStatusCode)
