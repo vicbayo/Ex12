@@ -1,9 +1,15 @@
 ﻿@page "/Proyectos"
 @inject HttpClient Http
+@inject DialogService DialogService
+@implements IDisposable
+
+<RadzenDialog />
 
 <h3>Gestión de Proyectos</h3>
+
 <div style="padding:10px">
-    <RadzenButton Click=@(args => OnClick("Light button")) Text="Nuevo" ButtonStyle="ButtonStyle.Light" />
+    @*<RadzenButton Click=@(args => OnClick("Light button")) Text="Nuevo" ButtonStyle="ButtonStyle.Light" />*@
+    <RadzenButton Click=@OpenOrder Text="Nuevo" ButtonStyle="ButtonStyle.Light" />
     <RadzenButton Click=@(args => OnClick("Light button")) Text="Editar" ButtonStyle="ButtonStyle.Light" />
 </div>
 
@@ -12,7 +18,7 @@
                 AllowPaging="true" PageSize="5" AllowSorting="true" AllowColumnResize="true" AllowColumnReorder="true"
                 SelectionMode="DataGridSelectionMode.Single" @bind-Value=@selected>
     <Columns>
-        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Id" Title="Id" />
+        <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Id" Title="Id" Visible="false" />
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Clave" Title="Clave" />
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="Titulo" Title="Título" />
         <RadzenDataGridColumn TItem="GetAllProyectosDto" Property="FechaAprobacion" Title="Aprobacion" FormatString="{0:dd/MM/yyyy}" TextAlign="TextAlign.Center" />
@@ -24,6 +30,7 @@
 
 </RadzenDataGrid>
 
+@*<EventConsole @ref=@console Class="mt-4" />*@
 
 @code {
     //EventConsole console;
@@ -33,6 +40,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        DialogService.OnOpen += Open;
+        DialogService.OnClose += Close;
+
         using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/GetAllIsActive");
 
         if (!httpResponse.IsSuccessStatusCode)
@@ -46,9 +56,32 @@
         // convert http response data to UsersResponse object
         proyectosDto = await httpResponse.Content.ReadFromJsonAsync<List<GetAllProyectosDto>>();
 
-        //selected = proyectosDto.Take(1).ToList();
+        selected = proyectosDto.Take(1).ToList();
     }
 
+    void Open(string title, Type type, Dictionary<string, object> parameters, DialogOptions options)
+    {
+        //console.Log("Dialog opened");
+    }
+
+    void Close(dynamic result)
+    {
+        //console.Log($"Dialog closed");
+    }
+
+    public async Task OpenOrder()
+    {
+        await DialogService.OpenAsync<NuevoProyecto>("Título",
+               new Dictionary<string, object>() { { "Id", Guid.NewGuid() } },
+               new DialogOptions() { Width = "700px", Height = "570px", Resizable = true, Draggable = true, CloseDialogOnOverlayClick = true });
+    }
+
+    public void Dispose()
+    {
+        // The DialogService is a singleton so it is advisable to unsubscribe.
+        DialogService.OnOpen -= Open;
+        DialogService.OnClose -= Close;
+    }
 
     void OnClick(string buttonName)
     {
