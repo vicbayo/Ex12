@@ -3,13 +3,13 @@
 @inject DialogService DialogService
 @implements IDisposable
 
-<RadzenDialog />
+<RadzenDialog @ref="DialogNuevoProyecto"/>
 
 <h3>Gestión de Proyectos</h3>
 
 <div style="padding:10px">
     @*<RadzenButton Click=@(args => OnClick("Light button")) Text="Nuevo" ButtonStyle="ButtonStyle.Light" />*@
-    <RadzenButton Click=@OpenOrder Text="Nuevo" ButtonStyle="ButtonStyle.Light" />
+    <RadzenButton Click=@MostrarNuevoProyecto Text="Nuevo" ButtonStyle="ButtonStyle.Light" />
     <RadzenButton Click=@(args => OnClick("Light button")) Text="Editar" ButtonStyle="ButtonStyle.Light" />
 </div>
 
@@ -37,6 +37,7 @@
     private IList<GetAllProyectosDto> proyectosDto;
     private string errorMessage;
     private IList<GetAllProyectosDto> selected = new List<GetAllProyectosDto>();
+    private RadzenDialog DialogNuevoProyecto;
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,11 +70,17 @@
         //console.Log($"Dialog closed");
     }
 
-    public async Task OpenOrder()
+    public async Task MostrarNuevoProyecto()
     {
         await DialogService.OpenAsync<NuevoProyecto>("Título",
                new Dictionary<string, object>() { { "Id", Guid.NewGuid() } },
-               new DialogOptions() { Width = "700px", Height = "570px", Resizable = true, Draggable = true, CloseDialogOnOverlayClick = true });
+               new DialogOptions() { Left = "340px",
+                                     Top = "200px", 
+                                     Width = "900px", 
+                                     Height = "455px", 
+                                     Resizable = false, 
+                                     Draggable = true, 
+                                     CloseDialogOnOverlayClick = true  });
     }
 
     public void Dispose()
