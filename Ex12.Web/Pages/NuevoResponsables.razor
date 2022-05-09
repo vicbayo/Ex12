@@ -1,0 +1,90 @@
+﻿@page "/NuevoResponsables"
+@using System.Text.Json
+@inject Radzen.DialogService dialogService
+
+<RadzenTemplateForm TItem="CrearResponsablesDemarcacionDto" Data=@responsables Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+    <div class="row">
+        <div class="col-lg-4 d-flex">
+            <h7 class="mb-0">Jefe Demarcación</h7>
+        </div>
+        <div class="col-lg-4 d-flex">
+            <h7 class="mb-0">Representante Demarcación</h7>
+        </div>
+        <div class="col-lg-4 d-flex">
+            <h7 class="mb-0">Ingeniero jefe área</h7>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 d-flex">
+            <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@responsables.JefeDemarcacion Class="w-100" style="display: block" />
+            @*<RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />*@
+        </div>
+        <div class="col-lg-4 d-flex">
+            <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@responsables.RepresentanteDemarcacion Class="w-100" style="display: block" />
+        </div>
+        <div class="col-lg-4 d-flex" style="margin-top: 7px; justify-content: center;">
+            <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@responsables.IngenieroJefeArea Class="w-100" style="display: block" />
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12 text-right pt-3">
+            <div style="display:inline">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Responsables" Style="text-align:left"></RadzenButton>
+            </div>
+            <RadzenButton Click="@((args) => dialogService.Close(false))" ButtonStyle="ButtonStyle.Primary" Text="Cancel" Style="width: 120px" Class="mr-1" />
+            @*<RadzenButton Click="@((args) => dialogService.Close(true))" Text="OK" Style="width: 120px" />*@
+            <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Secondary" Text="Aceptar"></RadzenButton>
+        </div>
+    </div>
+</RadzenTemplateForm>
+
+@*<EventConsole @ref=@console Class="mt-4" />*@
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    //EventConsole console;
+
+    DateTime FechaAprobacion = DateTime.Now;
+    bool IsActive = true;
+
+    void OnChange(string value, string name)
+    {
+        //console.Log($"{name} value changed to {value}");
+    }
+    void OnChangeFechaAprobacion(DateTime? value, string name, string format)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
+    void OnChangeTitulo(string name, string format)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
+    void OnChangeNotas(string name, string format)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
+    void OnChangeIsActive(bool estado, string name)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
+
+    bool popup;
+
+    CrearResponsablesDemarcacionDto responsables = new CrearResponsablesDemarcacionDto();
+
+    void OnSubmit(CrearResponsablesDemarcacionDto responsables)
+    {
+        //console.Log($"Submit: {JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true })}");
+    }
+
+    void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
+    {
+        //console.Log($"InvalidSubmit: {JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true })}");
+    }
+}
+

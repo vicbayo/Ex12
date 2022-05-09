@@ -1,6 +1,9 @@
 ﻿@page "/NuevoProyecto"
 @using System.Text.Json
-@inject Radzen.DialogService dialogService
+@inject HttpClient Http
+@inject Radzen.DialogService DialogService
+
+<RadzenDialog @ref="DialogNuevoResponsables" />
 
 <RadzenTemplateForm TItem="CrearProyectoDto" Data=@proyecto Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
     <div class="row">
@@ -11,7 +14,7 @@
             <h7 class="mb-0">Fecha Aprobación</h7>
         </div>
         <div class="col-lg-4 d-flex">
-            
+
         </div>
     </div>
 
@@ -57,9 +60,12 @@
 
     <div class="row">
         <div class="col-md-12 text-right pt-3">
-            <RadzenButton Click="@((args) => dialogService.Close(false))" ButtonStyle="ButtonStyle.Secondary" Text="Cancel" Style="width: 120px" Class="mr-1" />
+            <div style="display:inline">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Click="@MostrarResponsables" Text="Responsables" Style="text-align:left"></RadzenButton>
+            </div>
+            <RadzenButton Click="@((args) => DialogService.Close(false))" ButtonStyle="ButtonStyle.Primary" Text="Cancel" Style="width: 120px" Class="mr-1" />
             @*<RadzenButton Click="@((args) => dialogService.Close(true))" Text="OK" Style="width: 120px" />*@
-            <RadzenButton ButtonType="ButtonType.Submit" Text="Aceptar"></RadzenButton>
+            <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Secondary" Text="Aceptar"></RadzenButton>
         </div>
     </div>
 </RadzenTemplateForm>
@@ -73,6 +79,43 @@
 
     DateTime FechaAprobacion = DateTime.Now;
     bool IsActive = true;
+    private string errorMessage;
+    private RadzenDialog DialogNuevoResponsables;
+
+    private IList<GetAllProyectosDto> proyectosDto;
+
+    protected override async Task OnInitializedAsync()
+    {
+        DialogService.OnOpen += Open;
+        DialogService.OnClose += Close;
+
+        using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/GetAllIsActive");
+
+        if (!httpResponse.IsSuccessStatusCode)
+        {
+            // set error message for display, log to console and return
+            errorMessage = httpResponse.ReasonPhrase;
+            Console.WriteLine($"There was an error! {errorMessage}");
+            return;
+        }
+
+        // convert http response data to UsersResponse object
+        proyectosDto = await httpResponse.Content.ReadFromJsonAsync<List<GetAllProyectosDto>>();
+
+        //selected = proyectosDto.Take(1).ToList();
+
+    }
+
+    void Open(string title, Type type, Dictionary<string, object> parameters, DialogOptions options)
+    {
+        //console.Log("Dialog opened");
+    }
+
+    void Close(dynamic result)
+    {
+        //console.Log($"Dialog closed");
+    }
+
 
     void OnChange(string value, string name)
     {
@@ -107,5 +150,21 @@
     void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
     {
         //console.Log($"InvalidSubmit: {JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true })}");
+    }
+
+    public async Task MostrarResponsables()
+    {
+        await DialogService.OpenAsync<NuevoResponsables>("Título",
+               new Dictionary<string, object>() { { "Id", Guid.NewGuid() } },
+               new DialogOptions()
+               {
+                   Left = "340px",
+                   Top = "200px",
+                   Width = "900px",
+                   Height = "455px",
+                   Resizable = false,
+                   Draggable = true,
+                   CloseDialogOnOverlayClick = true
+               });
     }
 }
