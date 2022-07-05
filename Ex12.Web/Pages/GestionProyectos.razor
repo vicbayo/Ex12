@@ -44,7 +44,7 @@
         DialogService.OnOpen += Open;
         DialogService.OnClose += Close;
 
-        using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/GetAllIsActive");
+        using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/Get");
 
         if (!httpResponse.IsSuccessStatusCode)
         {
@@ -78,7 +78,7 @@
                                      Top = "200px", 
                                      Width = "900px", 
                                      Height = "535px", 
-                                     Resizable = false, 
+                                     Resizable = true, 
                                      Draggable = true, 
                                      CloseDialogOnOverlayClick = true  });
     }

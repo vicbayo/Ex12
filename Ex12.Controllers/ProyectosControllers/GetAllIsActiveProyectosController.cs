@@ -28,8 +28,8 @@ namespace Ex12.Controllers.ProyectosControllers
             _outputPort = outputPort;
         }
 
-        [HttpGet("GetAllIsActive")]
-        public async Task<IEnumerable<GetAllProyectosDto>> GetAllIsActive()
+        [HttpGet("Get")]
+        public async Task<IEnumerable<GetAllProyectosDto>> Get()
         {
             //Specification<Proyecto> specification = new ProyectosIsActiveSpec();
             //Specification<Proyecto> specification2 = new ProyectosDeletedSpec();

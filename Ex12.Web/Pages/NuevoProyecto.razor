@@ -1,10 +1,10 @@
 ﻿@page "/NuevoProyecto"
 @using System.Text.Json
+@using Ex12.Dtos.ModelView
 @inject HttpClient Http
 @inject Radzen.DialogService DialogService
 
-
-<RadzenTemplateForm TItem="CrearProyectoDto" Data=@proyecto Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+<RadzenTemplateForm TItem="CrearProyectoMvDto" Data=@proyecto Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
     <RadzenTabs>
         <Tabs>
             <RadzenTabsItem Text="Proyecto">
@@ -22,15 +22,15 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@proyecto.Clave Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@proyecto.ProyectoDto.Clave Class="w-100" style="display: block" />
                         <RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenDatePicker @bind-Value=@FechaAprobacion DateFormat="dd/MM/yyyy"
+                        <RadzenDatePicker @bind-Value=@proyecto.ProyectoDto.FechaAprobacion DateFormat="dd/MM/yyyy"
                                           Change=@(args => OnChangeFechaAprobacion(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
                     </div>
                     <div class="col-lg-4 d-flex" style="margin-top: 7px; justify-content: center;">
-                        <RadzenCheckBox @bind-Value=@IsActive Name="CheckBox1" TValue="bool" Change=@(args => OnChangeIsActive(args, "CheckBox1 CheckBox")) />
+                        <RadzenCheckBox @bind-Value=@proyecto.ProyectoDto.IsActive Name="CheckBox1" TValue="bool" Change=@(args => OnChangeIsActive(args, "CheckBox1 CheckBox")) />
                         <RadzenLabel Text="Activo" Component="Activo" Style="margin-left: 8px; vertical-align: middle;" />
                     </div>
                 </div>
@@ -43,7 +43,8 @@
 
                 <div class="row">
                     <div class="col-lg-12 d-flex">
-                        <RadzenTextArea Cols="30" Rows="3" Change=@(args => OnChangeTitulo(args, "TextArea")) Name="Titulo" @bind-Value=@proyecto.Titulo Class="w-100" />
+                        <RadzenTextArea Cols="30" Rows="3" Change=@(args => OnChangeTitulo(args, "TextArea")) 
+                            Name="Titulo" @bind-Value=@proyecto.ProyectoDto.Titulo Class="w-100" />
                         <RadzenRequiredValidator Component="Titulo" Text="" Popup=@popup Style="position: absolute" />
                     </div>
                 </div>
@@ -56,7 +57,8 @@
 
                 <div class="row">
                     <div class="col-lg-12 d-flex">
-                        <RadzenTextArea Cols="30" Rows="3" Change=@(args => OnChangeNotas(args, "TextArea")) Class="w-100" />
+                        <RadzenTextArea Cols="30" Rows="3" Change=@(args => OnChangeNotas(args, "TextArea")) 
+                            Name="Nota" @bind-Value=@proyecto.ProyectoDto.Notes  Class="w-100" />
                     </div>
                 </div>
             </RadzenTabsItem>
@@ -75,25 +77,55 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@responsables.JefeDemarcacion Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.JefeDemarcacion Class="w-100" style="display: block" />
                         @*<RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />*@
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@responsables.RepresentanteDemarcacion Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.RepresentanteDemarcacion Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@responsables.IngenieroJefeArea Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroJefeArea Class="w-100" style="display: block" />
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Perito Demarcación</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <h7 class="mb-0">Ingeniero Circumbalación</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <h7 class="mb-0">Ingeniero Jefe</h7>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex">
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.PeritoDemarcacion Class="w-100" style="display: block" />
+                        @*<RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />*@
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroCircumbalacion Class="w-100" style="display: block" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroJefe Class="w-100" style="display: block" />
+                    </div>
+                </div>
             </RadzenTabsItem>
         </Tabs>
     </RadzenTabs>
 
     <div class="row">
-        <div class="col-md-12 align-items:flex-end">
+        <div class="col-md-12  d-flex align-items-end">
             <RadzenButton Click="@((args) => DialogService.Close(false))" ButtonStyle="ButtonStyle.Primary" Text="Cancel" Style="width: 120px" Class="mr-1" />
-            @*<RadzenButton Click="@((args) => dialogService.Close(true))" Text="OK" Style="width: 120px" />*@
+            <RadzenButton Click="@((args) => DialogService.Close(true))" Text="OK" Style="width: 120px" />
             <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Secondary" Text="Aceptar"></RadzenButton>
         </div>
     </div>
@@ -115,29 +147,28 @@
     private IList<GetAllProyectosDto> proyectosDto;
 
     bool popup;
-
-    CrearProyectoDto proyecto = new CrearProyectoDto();
-    CrearResponsablesDemarcacionDto responsables = new CrearResponsablesDemarcacionDto();
+    CrearProyectoMvDto proyecto = new CrearProyectoMvDto();
 
     protected override async Task OnInitializedAsync()
     {
+        
         DialogService.OnOpen += Open;
         DialogService.OnClose += Close;
 
-        using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/GetAllIsActive");
+        //using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/Get");
 
-        if (!httpResponse.IsSuccessStatusCode)
-        {
-            // set error message for display, log to console and return
-            errorMessage = httpResponse.ReasonPhrase;
-            Console.WriteLine($"There was an error! {errorMessage}");
-            return;
-        }
+        //if (!httpResponse.IsSuccessStatusCode)
+        //{
+        //    // set error message for display, log to console and return
+        //    errorMessage = httpResponse.ReasonPhrase;
+        //    Console.WriteLine($"There was an error! {errorMessage}");
+        //    return;
+        //}
 
-        // convert http response data to UsersResponse object
-        proyectosDto = await httpResponse.Content.ReadFromJsonAsync<List<GetAllProyectosDto>>();
+        //// convert http response data to UsersResponse object
+        //proyectosDto = await httpResponse.Content.ReadFromJsonAsync<List<GetAllProyectosDto>>();
 
-        //selected = proyectosDto.Take(1).ToList();
+        ////selected = proyectosDto.Take(1).ToList();
 
     }
 
@@ -174,7 +205,7 @@
     }
 
 
-    void OnSubmit(CrearProyectoDto proyecto)
+    void OnSubmit(CrearProyectoMvDto proyecto)
     {
         //console.Log($"Submit: {JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true })}");
     }
