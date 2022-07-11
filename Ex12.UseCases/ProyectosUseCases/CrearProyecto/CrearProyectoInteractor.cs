@@ -58,9 +58,9 @@ namespace Ex12.UseCases.ProyectosUseCases.CrearProyecto
                 NuevaDeclaracion.Ley = proyectoDto.CrearDeclaracionDto.Ley;
                 NuevaDeclaracion.FechaLey = proyectoDto.CrearDeclaracionDto.FechaLey;
                 NuevaDeclaracion.Articulo = proyectoDto.CrearDeclaracionDto.Articulo;
-                NuevaDeclaracion.BOE = proyectoDto.CrearDeclaracionDto.BOE;
+                NuevaDeclaracion.NumeroBOE = proyectoDto.CrearDeclaracionDto.NumeroBOE;
                 NuevaDeclaracion.FechaBOE = proyectoDto.CrearDeclaracionDto.FechaBOE;
-                NuevaDeclaracion.UrlBOE = proyectoDto.CrearDeclaracionDto.UrlBOE;
+                NuevaDeclaracion.ReferenciaBOE = proyectoDto.CrearDeclaracionDto.ReferenciaBOE;
             }
 
 

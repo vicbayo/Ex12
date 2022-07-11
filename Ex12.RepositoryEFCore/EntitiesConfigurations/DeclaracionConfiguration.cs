@@ -21,7 +21,7 @@ namespace Ex12.RepositoryEFCore.EntitiesConfigurations
             //builder.Property(x => x.Articulo);
             //builder.Property(x => x.BOE);
             //builder.Property(x => x.FechaBOE);
-            builder.Property(x => x.UrlBOE).HasMaxLength(150);
+            builder.Property(x => x.ReferenciaBOE).HasMaxLength(30);
         }
     }
 }

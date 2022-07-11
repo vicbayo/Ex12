@@ -4,6 +4,7 @@ using Ex12.RepositoryEFCore.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ex12.RepositoryEFCore.Migrations
 {
     [DbContext(typeof(Ex12Context))]
-    partial class Ex12ContextModelSnapshot : ModelSnapshot
+    [Migration("20220711210440_DeclaracionCambios")]
+    partial class DeclaracionCambios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

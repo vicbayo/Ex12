@@ -20,10 +20,10 @@ namespace Ex12.Dtos.ProyectosDtos
 
         public int? Articulo { get; set; }
 
-        public int? BOE { get; set; }
+        public int? NumeroBOE { get; set; }
 
         public DateTime? FechaBOE { get; set; }
 
-        public string UrlBOE { get; set; }
+        public string ReferenciaBOE { get; set; }
     }
 }

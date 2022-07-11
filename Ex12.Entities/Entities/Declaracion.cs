@@ -20,11 +20,11 @@ namespace Ex12.Entities.Entities
 
         public int? Articulo { get; set; }
 
-        public int? BOE { get; set; }
+        public int? NumeroBOE { get; set; }
 
         public DateTime? FechaBOE { get; set; }
 
-        public string UrlBOE { get; set; }
+        public string ReferenciaBOE { get; set; }
 
     }
 }

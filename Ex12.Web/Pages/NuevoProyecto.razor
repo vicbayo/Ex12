@@ -95,10 +95,10 @@
                     <div class="col-lg-4 d-flex pt-2">
                         <h7 class="mb-0">Perito Demarcación</h7>
                     </div>
-                    <div class="col-lg-4 d-flex">
+                    <div class="col-lg-4 d-flex pt-2">
                         <h7 class="mb-0">Ingeniero Circumbalación</h7>
                     </div>
-                    <div class="col-lg-4 d-flex">
+                    <div class="col-lg-4 d-flex pt-2">
                         <h7 class="mb-0">Ingeniero Jefe</h7>
                     </div>
                 </div>
@@ -116,6 +116,114 @@
                     <div class="col-lg-4 d-flex">
                         <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
                             Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroJefe Class="w-100" style="display: block" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Pagador</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex pt-2">
+                        
+                    </div>
+                    <div class="col-lg-4 d-flex pt-2">
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex">
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.Pagador Class="w-100" style="display: block" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+
+                    </div>
+                    <div class="col-lg-4 d-flex">
+
+                    </div>
+                </div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Declaración">
+                <div class="row">
+                    <div class="col-lg-4 d-flex">
+                        <h7 class="mb-0">Fecha declaración</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <h7 class="mb-0"></h7>
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <h7 class="mb-0"></h7>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex">
+                        <RadzenDatePicker @bind-Value=@proyecto.DeclaracionDto.FechaDeclaracion DateFormat="dd/MM/yyyy"
+                                          Change=@(args => OnChangeFechaDeclaracion(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+
+                    </div>
+                    <div class="col-lg-4 d-flex">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Artículo</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Fecha ley</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0"></h7>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex">
+@*                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="Articulo" @bind-Value=@proyecto.DeclaracionDto.Articulo.ToString() Class="w-100" style="display: block" />*@
+                        <RadzenNumeric TValue="int?" Name="Articulo" 
+                            @bind-Value=@proyecto.DeclaracionDto.Articulo Class="w-100" style="display: block" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <RadzenDatePicker @bind-Value=@proyecto.DeclaracionDto.FechaLey DateFormat="dd/MM/yyyy"
+                                          Change=@(args => OnChangeFechaLey(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Fecha BOE</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Número BOE</h7>
+                    </div>
+                    <div class="col-lg-4 d-flex pt-2">
+                        <h7 class="mb-0">Referencia BOE</h7>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 d-flex">
+                        <RadzenDatePicker @bind-Value=@proyecto.DeclaracionDto.FechaBOE DateFormat="dd/MM/yyyy"
+                                          Change=@(args => OnChangeFechaBOE(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+@*                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="NumeroBOE" @bind-Value=@proyecto.DeclaracionDto.NumeroBOE Class="w-100" style="display: block" />*@
+                        <RadzenNumeric TValue="int?" Name="NumeroBOE" 
+                            @bind-Value=@proyecto.DeclaracionDto.NumeroBOE Class="w-100" style="display: block" />
+                    </div>
+                    <div class="col-lg-4 d-flex">
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
+                            Name="ReferenciaBOE" @bind-Value=@proyecto.DeclaracionDto.ReferenciaBOE Class="w-100" style="display: block" />
                     </div>
                 </div>
             </RadzenTabsItem>
@@ -147,7 +255,8 @@
     private IList<GetAllProyectosDto> proyectosDto;
 
     bool popup;
-    CrearProyectoMvDto proyecto = new CrearProyectoMvDto();
+    CrearProyectoMvDto proyecto = new CrearProyectoMvDto();    
+    //proyecto.ProyectoDto.FechaAprobacion = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {
@@ -203,7 +312,18 @@
     {
         //console.Log($"{name} value changed to {value?.ToString(format)}");
     }
-
+    void OnChangeFechaDeclaracion(DateTime? value, string name, string format)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
+    void OnChangeFechaLey(DateTime? value, string name, string format)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
+    void OnChangeFechaBOE(DateTime? value, string name, string format)
+    {
+        //console.Log($"{name} value changed to {value?.ToString(format)}");
+    }
 
     void OnSubmit(CrearProyectoMvDto proyecto)
     {

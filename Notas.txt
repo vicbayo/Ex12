@@ -19,3 +19,6 @@ Usar con o sin -EnableAutomaticMigrations
 Y finalmente, puedes ejecutar:
 
 4-Add-Migration Initial
+
+
+Ejecutar el API por consola y actualizando cambios con hot reload : dotnet watch run
