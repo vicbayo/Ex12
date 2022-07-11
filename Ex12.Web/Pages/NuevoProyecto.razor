@@ -79,7 +79,6 @@
                     <div class="col-lg-4 d-flex">
                         <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
                             Name="Clave" @bind-Value=@proyecto.ResponsablesDto.JefeDemarcacion Class="w-100" style="display: block" />
-                        @*<RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />*@
                     </div>
                     <div class="col-lg-4 d-flex">
                         <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
@@ -184,8 +183,6 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-@*                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Articulo" @bind-Value=@proyecto.DeclaracionDto.Articulo.ToString() Class="w-100" style="display: block" />*@
                         <RadzenNumeric TValue="int?" Name="Articulo" 
                             @bind-Value=@proyecto.DeclaracionDto.Articulo Class="w-100" style="display: block" />
                     </div>
@@ -216,8 +213,6 @@
                                           Change=@(args => OnChangeFechaBOE(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
                     </div>
                     <div class="col-lg-4 d-flex">
-@*                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="NumeroBOE" @bind-Value=@proyecto.DeclaracionDto.NumeroBOE Class="w-100" style="display: block" />*@
                         <RadzenNumeric TValue="int?" Name="NumeroBOE" 
                             @bind-Value=@proyecto.DeclaracionDto.NumeroBOE Class="w-100" style="display: block" />
                     </div>
@@ -232,8 +227,7 @@
 
     <div class="row">
         <div class="col-md-12  d-flex align-items-end">
-            <RadzenButton Click="@((args) => DialogService.Close(false))" ButtonStyle="ButtonStyle.Primary" Text="Cancel" Style="width: 120px" Class="mr-1" />
-            @*<RadzenButton Click="@((args) => DialogService.Close(true))" Text="OK" Style="width: 120px" />*@
+            <RadzenButton Click="@((args) => DialogService.Close(false))" ButtonStyle="ButtonStyle.Primary" Text="Cancel" Style="width: 120px" Class="mr-1" />            
             <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Secondary" Text="Aceptar"></RadzenButton>
         </div>
     </div>
