@@ -15,7 +15,7 @@ namespace Ex12.RepositoryEFCore.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Descripcion).HasMaxLength(150);
-            //builder.Property(x => x.FechaDeclaracion);
+            //builder.Property(x => x.FechaDeclaracion).IsRequired();
             builder.Property(x => x.Ley).HasMaxLength(50);
             //builder.Property(x => x.FechaLey);
             //builder.Property(x => x.Articulo);
