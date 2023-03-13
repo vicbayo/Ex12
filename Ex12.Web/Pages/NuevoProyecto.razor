@@ -4,7 +4,7 @@
 @inject HttpClient Http
 @inject Radzen.DialogService DialogService
 
-<RadzenTemplateForm TItem="CrearProyectoMvDto" Data=@proyecto Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+<RadzenTemplateForm TItem="CrearProyectoDto" Data=@proyecto Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
     <RadzenTabs>
         <Tabs>
             <RadzenTabsItem Text="Proyecto">
@@ -22,15 +22,15 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@proyecto.ProyectoDto.Clave Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) Name="Clave" @bind-Value=@proyecto.Clave Class="w-100" style="display: block" />
                         <RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenDatePicker @bind-Value=@proyecto.ProyectoDto.FechaAprobacion DateFormat="dd/MM/yyyy"
+                        <RadzenDatePicker @bind-Value=@proyecto.FechaAprobacion DateFormat="dd/MM/yyyy"
                                           Change=@(args => OnChangeFechaAprobacion(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
                     </div>
                     <div class="col-lg-4 d-flex" style="margin-top: 7px; justify-content: center;">
-                        <RadzenCheckBox @bind-Value=@proyecto.ProyectoDto.IsActive Name="CheckBox1" TValue="bool" Change=@(args => OnChangeIsActive(args, "CheckBox1 CheckBox")) />
+                        <RadzenCheckBox @bind-Value=@proyecto.IsActive Name="CheckBox1" TValue="bool" Change=@(args => OnChangeIsActive(args, "CheckBox1 CheckBox")) />
                         <RadzenLabel Text="Activo" Component="Activo" Style="margin-left: 8px; vertical-align: middle;" />
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-lg-12 d-flex">
                         <RadzenTextArea Cols="30" Rows="3" Change=@(args => OnChangeTitulo(args, "TextArea")) 
-                            Name="Titulo" @bind-Value=@proyecto.ProyectoDto.Titulo Class="w-100" />
+                            Name="Titulo" @bind-Value=@proyecto.Titulo Class="w-100" />
                         <RadzenRequiredValidator Component="Titulo" Text="" Popup=@popup Style="position: absolute" />
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-lg-12 d-flex">
                         <RadzenTextArea Cols="30" Rows="3" Change=@(args => OnChangeNotas(args, "TextArea")) 
-                            Name="Nota" @bind-Value=@proyecto.ProyectoDto.Notes  Class="w-100" />
+                            Name="Nota" @bind-Value=@proyecto.Notes  Class="w-100" />
                     </div>
                 </div>
             </RadzenTabsItem>
@@ -77,16 +77,16 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.JefeDemarcacion Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.JefeDemarcacion Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.RepresentanteDemarcacion Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.RepresentanteDemarcacion Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroJefeArea Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.IngenieroJefeArea Class="w-100" style="display: block" />
                     </div>
                 </div>
 
@@ -104,17 +104,17 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.PeritoDemarcacion Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.PeritoDemarcacion Class="w-100" style="display: block" />
                         @*<RadzenRequiredValidator Component="Clave" Text="" Popup=@popup Style="position: absolute" />*@
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroCircumbalacion Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.IngenieroCircumbalacion Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.IngenieroJefe Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.IngenieroJefe Class="w-100" style="display: block" />
                     </div>
                 </div>
 
@@ -132,8 +132,8 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="Clave" @bind-Value=@proyecto.ResponsablesDto.Pagador Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="Clave" @bind-Value=@proyecto.CrearResponsablesDemarcacionDto.Pagador Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
 
@@ -158,8 +158,8 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenDatePicker @bind-Value=@proyecto.DeclaracionDto.FechaDeclaracion DateFormat="dd/MM/yyyy"
-                                          Change=@(args => OnChangeFechaDeclaracion(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
+                        <RadzenDatePicker @bind-Value=@proyecto.CrearDeclaracionDto.FechaDeclaracion DateFormat="dd/MM/yyyy"
+                            Change=@(args => OnChangeFechaDeclaracion(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
                     </div>
                     <div class="col-lg-4 d-flex">
 
@@ -183,12 +183,12 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenNumeric TValue="int?" Name="Articulo" 
-                            @bind-Value=@proyecto.DeclaracionDto.Articulo Class="w-100" style="display: block" />
+                        <RadzenNumeric TValue="int?" Name="Articulo"
+                            @bind-Value=@proyecto.CrearDeclaracionDto.Articulo Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenDatePicker @bind-Value=@proyecto.DeclaracionDto.FechaLey DateFormat="dd/MM/yyyy"
-                                          Change=@(args => OnChangeFechaLey(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
+                        <RadzenDatePicker @bind-Value=@proyecto.CrearDeclaracionDto.FechaLey DateFormat="dd/MM/yyyy"
+                            Change=@(args => OnChangeFechaLey(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
                     </div>
                     <div class="col-lg-4 d-flex">
 
@@ -209,16 +209,16 @@
 
                 <div class="row">
                     <div class="col-lg-4 d-flex">
-                        <RadzenDatePicker @bind-Value=@proyecto.DeclaracionDto.FechaBOE DateFormat="dd/MM/yyyy"
-                                          Change=@(args => OnChangeFechaBOE(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
+                        <RadzenDatePicker @bind-Value=@proyecto.CrearDeclaracionDto.FechaBOE DateFormat="dd/MM/yyyy"
+                            Change=@(args => OnChangeFechaBOE(args, "DatePicker", "MM/dd/yyyy")) Class="w-100" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenNumeric TValue="int?" Name="NumeroBOE" 
-                            @bind-Value=@proyecto.DeclaracionDto.NumeroBOE Class="w-100" style="display: block" />
+                        <RadzenNumeric TValue="int?" Name="NumeroBOE"
+                            @bind-Value=@proyecto.CrearDeclaracionDto.NumeroBOE Class="w-100" style="display: block" />
                     </div>
                     <div class="col-lg-4 d-flex">
-                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox")) 
-                            Name="ReferenciaBOE" @bind-Value=@proyecto.DeclaracionDto.ReferenciaBOE Class="w-100" style="display: block" />
+                        <RadzenTextBox Change=@(args => OnChange(args, "TextBox"))
+                            Name="ReferenciaBOE" @bind-Value=@proyecto.CrearDeclaracionDto.ReferenciaBOE Class="w-100" style="display: block" />
                     </div>
                 </div>
             </RadzenTabsItem>
@@ -247,14 +247,14 @@
 
 
     bool popup;
-    CrearProyectoMvDto proyecto = new CrearProyectoMvDto();    
+    CrearProyectoDto proyecto = new CrearProyectoDto();    
     //proyecto.ProyectoDto.FechaAprobacion = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {
-        
-        DialogService.OnOpen += Open;
-        DialogService.OnClose += Close;
+
+        //DialogService.OnOpen += Open;
+        //DialogService.OnClose += Close;
 
         //using var httpResponse = await Http.GetAsync("api/GetAllIsActiveProyectos/Get");
 
@@ -317,9 +317,31 @@
         //console.Log($"{name} value changed to {value?.ToString(format)}");
     }
 
-    void OnSubmit(CrearProyectoMvDto proyecto)
+    async void OnSubmit(CrearProyectoDto proyecto)
     {
         //console.Log($"Submit: {JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true })}");
+
+        //Se acepta la creación del proyecto
+        proyecto.Creador = "YO";
+        proyecto.FechaCreacion = DateTime.Now;
+
+        JsonContent content = JsonContent.Create(proyecto);
+
+        using var httpResponse = await Http.PostAsync("api/CrearProyecto", content);
+
+        if (!httpResponse.IsSuccessStatusCode)
+        {
+            // set error message for display, log to console and return
+            errorMessage = httpResponse.ReasonPhrase;
+            Console.WriteLine($"There was an error! {errorMessage}");
+            return;
+        }
+
+        // convert http response data to UsersResponse object
+        //proyectosDto = await httpResponse.Content.ReadFromJsonAsync<List<GetAllProyectosDto>>();
+
+        //selected = proyectosDto.Take(1).ToList();
+
     }
 
     void OnInvalidSubmit(FormInvalidSubmitEventArgs args)

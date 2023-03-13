@@ -16,11 +16,12 @@ namespace Ex12.Dtos.ProyectosDtos
         //public DateTime? Deleted { get; set; }
         public string Notes { get; set; }
         //public byte[] RowVersion { get; set; }
-        //public string Creador { get; set; }
-        //public DateTime FechaCreacion { get; set; }
+        public string Creador { get; set; }
+        public DateTime FechaCreacion { get; set; }
         //public string Modificador { get; set; }
         //public DateTime? FechaModificacion { get; set; }
-        public CrearResponsablesDemarcacionDto CrearResponsablesDemarcacionDto { get; set; }
-        public CrearDeclaracionDto CrearDeclaracionDto { get; set; }
+        public bool IsActive { get; set; }
+        public CrearResponsablesDemarcacionDto CrearResponsablesDemarcacionDto { get; set; } = new CrearResponsablesDemarcacionDto();
+        public CrearDeclaracionDto CrearDeclaracionDto { get; set; } = new CrearDeclaracionDto();
     }
 }

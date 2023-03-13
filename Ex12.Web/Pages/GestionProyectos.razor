@@ -14,7 +14,8 @@
 </div>
 
 @*@bind-Value=@selected*@
-<RadzenDataGrid Data="proyectosDto" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced"
+<RadzenDataGrid Data="proyectosDto" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" 
+                FilterMode="FilterMode.Advanced"
                 AllowPaging="true" PageSize="5" AllowSorting="true" AllowColumnResize="true" AllowColumnReorder="true"
                 SelectionMode="DataGridSelectionMode.Single" @bind-Value=@selected>
     <Columns>
@@ -70,16 +71,41 @@
         //console.Log($"Dialog closed");
     }
 
+    //public async Task MostrarNuevoProyecto()
+    //{
+    //    await DialogService.OpenAsync<NuevoProyecto>("Título",
+    //           new Dictionary<string, object>() { { "Id", Guid.NewGuid() } },
+    //           new DialogOptions() { Left = "340px",
+    //                                 Top = "200px", 
+    //                                 Width = "900px", 
+    //                                 Height = "535px", 
+    //                                 Resizable = true, 
+    //                                 Draggable = true, 
+    //                                 CloseDialogOnOverlayClick = true  });
+    //}
+
+    //public async Task MostrarNuevoProyecto()
+    //{
+    //    await DialogService.OpenSideAsync<NuevoProyecto>("Título",
+    //           new Dictionary<string, object>() { { "Id", Guid.NewGuid() } },
+    //           new SideDialogOptions()
+    //               {
+    //                   Position = DialogPosition.Right,
+    //                   ShowMask = false,
+    //                   Width = "900px",
+    //                   Height = "535px",
+    //                   CloseDialogOnOverlayClick = true
+    //               });
+    //}
+
     public async Task MostrarNuevoProyecto()
     {
         await DialogService.OpenAsync<NuevoProyecto>("Título",
                new Dictionary<string, object>() { { "Id", Guid.NewGuid() } },
-               new DialogOptions() { Left = "340px",
-                                     Top = "200px", 
-                                     Width = "900px", 
-                                     Height = "535px", 
-                                     Resizable = true, 
-                                     Draggable = true, 
+               new DialogOptions() { Width = "900px",
+                                     Height = "535px",
+                                     Resizable = true,
+                                     Draggable = true,
                                      CloseDialogOnOverlayClick = true  });
     }
 

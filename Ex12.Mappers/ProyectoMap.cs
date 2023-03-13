@@ -1,4 +1,5 @@
-﻿using Ex12.Dtos.ProyectosDtos;
+﻿using Ex12.Dtos.ModelView;
+using Ex12.Dtos.ProyectosDtos;
 using Ex12.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -163,5 +164,35 @@ namespace Ex12.Mappers
             }
             return proyectos;
         }
+
+
+        ///// <summary>
+        ///// Transforma proyectoDto a proyectoMvDto
+        ///// </summary>
+        ///// <param name="proyectoDto"></param>
+        ///// <returns></returns>
+        //public static CrearProyectoMvDto ToProyectoMvDto(CrearProyectoDto crearProyectoDto)
+        //{
+        //    CrearProyectoMvDto crearProyectoMvDto = new CrearProyectoMvDto();
+        //    crearProyectoMvDto.ResponsablesDto = crearProyectoDto.CrearResponsablesDemarcacionDto;
+        //    crearProyectoMvDto.DeclaracionDto = crearProyectoDto.CrearDeclaracionDto;
+
+        //    CrearResponsablesDemarcacionDto rd = new CrearResponsablesDemarcacionDto
+        //    {
+        //        JefeDemarcacion = crearProyectoDto.CrearResponsablesDemarcacionDto.JefeDemarcacion,
+        //        IngenieroCircumbalacion = crearProyectoDto.CrearResponsablesDemarcacionDto.IngenieroCircumbalacion,
+        //        PeritoDemarcacion = crearProyectoDto.CrearResponsablesDemarcacionDto.PeritoDemarcacion,
+        //        RepresentanteDemarcacion = crearProyectoDto.CrearResponsablesDemarcacionDto.RepresentanteDemarcacion,
+        //        IngenieroJefeArea = crearProyectoDto.CrearResponsablesDemarcacionDto.IngenieroJefeArea,
+        //        IngenieroJefe = crearProyectoDto.CrearResponsablesDemarcacionDto.IngenieroJefe,
+        //        Pagador = crearProyectoDto.CrearResponsablesDemarcacionDto.Pagador,
+        //    };
+
+        //    CrearDeclaracionDto declaracion = new CrearDeclaracionDto();
+
+        //    crearProyectoDto.CrearResponsablesDemarcacionDto = rd;
+
+        //    return crearProyectoMvDto;
+        //}
     }
 }
